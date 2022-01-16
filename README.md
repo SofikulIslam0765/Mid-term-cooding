@@ -33,6 +33,8 @@ git add .
 git commit -m "name of the topic"
   
 git push -u origin master
+  
+----------------------------------------------------------------
 
 8 pushes required
   
