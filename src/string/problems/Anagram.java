@@ -1,8 +1,5 @@
 package string.problems;
 
-/**
- * Created by mrahman on 04/22/17.
- */
 public class Anagram {
 
     public static void main(String[] args) {

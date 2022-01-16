@@ -6,7 +6,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import parser.Student;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,23 +33,6 @@ public class ConnectToMongoDB {
         return profile + " has been registered";
     }
 
-    public String insertIntoMongoDB(List<Student> student,String profileName){
-        MongoDatabase mongoDatabase = connectToMongoDB();
-        MongoCollection myCollection = mongoDatabase.getCollection(profileName);
-        boolean collectionExists = mongoDatabase.listCollectionNames()
-                .into(new ArrayList<String>()).contains(profileName);
-        if(collectionExists) {
-            myCollection.drop();
-        }
-        for(int i=0; i<student.size(); i++){
-            MongoCollection<Document> collection = mongoDatabase.getCollection(profileName);
-            Document document = new Document().append("firstName", student.get(i).getFirstName()).append("lastName",
-                    student.get(i).getLastName()).append("score",student.get(i).getScore()).append("id", student.get(i).getId());
-            collection.insertOne(document);
-        }
-        return  "Student has been registered";
-    }
-
     public List<User> readUserProfileFromMongoDB(){
         List<User> list = new ArrayList<User>();
         User user = new User();
@@ -68,28 +50,6 @@ public class ConnectToMongoDB {
             user.setStID(stDOB);
             user = new User(stName,stID,stDOB);
             list.add(user);
-        }
-        return list;
-    }
-
-    public List<Student> readStudentListFromMongoDB(String profileName){
-        List<Student> list = new ArrayList<Student>();
-        Student student = new Student();
-        MongoDatabase mongoDatabase = connectToMongoDB();
-        MongoCollection<Document> collection = mongoDatabase.getCollection(profileName);
-        BasicDBObject basicDBObject = new BasicDBObject();
-        FindIterable<Document> iterable = collection.find(basicDBObject);
-        for(Document doc:iterable){
-            String firstName = (String)doc.get("firstName");
-            student.setFirstName(firstName);
-            String lastName = (String)doc.get("lastName");
-            student.setLastName(lastName);
-            String score = (String)doc.get("score");
-            student.setScore(score);
-            String id = (String) doc.get("id");
-            student.setId(id);
-            student = new Student(student.getFirstName(),student.getLastName(),student.getScore(),student.getId());
-            list.add(student);
         }
         return list;
     }

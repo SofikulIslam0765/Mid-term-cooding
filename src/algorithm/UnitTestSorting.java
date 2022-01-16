@@ -1,6 +1,6 @@
 package algorithm;
 
-import org.testng.Assert;
+import org.junit.Assert;
 
 public class UnitTestSorting {
 
@@ -16,7 +16,7 @@ public class UnitTestSorting {
         sort.selectionSort(unSortedArray);
         //verify if the unsorted array is sorted by the selection sort algorithm.
         try {
-            Assert.assertEquals(sortedArray, unSortedArray, "Array is not Sorted");
+            Assert.assertEquals(sortedArray, unSortedArray);
         }catch(Exception ex){
             ex.getMessage();
         }
