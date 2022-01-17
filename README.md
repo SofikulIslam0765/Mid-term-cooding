@@ -14,7 +14,7 @@ git remote show origin
 
 git remote rm origin
 
-git remote add origin
+git remote add origin <your own github url>
 
 git init
 
@@ -36,6 +36,12 @@ git push -u origin master
 
 -----------------------------------------------------------------
 
-8 pushes required
+7 pushes required
 
 every time you finish a topic, you need to push your work
+
+-----------------------------------------------------------------
+
+submit your midterm github url to the link below:
+
+https://forms.gle/KYfHSc5iNW6PenGc8
